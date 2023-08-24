@@ -2,13 +2,13 @@
 import classNames from "classnames";
 import React, { useState } from "react";
 import Link from 'next/link';
-import { Article, Cube, ChartBar, SignOut, CaretDoubleLeft , Notepad } from "@phosphor-icons/react";
+import { Article, Cube, PresentationChart, SignOut, CaretDoubleLeft, ReadCvLogo } from "@phosphor-icons/react";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const menuItems = [
-  { id: 1, label: "Dashboard", icon: ChartBar, link: "/" },
+  { id: 1, label: "Dashboard", icon: PresentationChart, link: "/" },
   { id: 2, label: "Área Temática", icon: Cube, link: "/thematic_area" },
-  { id: 3, label: "Tipo de Item", icon: Article, link: "/types" },
-  
+  { id: 3, label: "Tipo de Item", icon: Article, link: "/types" }  
 ];
 
 interface MenuItem {
@@ -26,7 +26,7 @@ const Sidebar = () => {
     "h-screen px-4 pt-8 pb-4 bg-zinc-100 flex justify-between flex-col",
     {
       ["w-80"]: !toggleCollapse,
-      ["w-20"]: toggleCollapse,
+      ["w-25"]: toggleCollapse,
     }
   );
 
@@ -55,7 +55,7 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative">
           <div className="flex pl-1 gap-4">
-            <Notepad size={40} />
+            <ReadCvLogo size={40} />
             <span
               className={classNames("mt-2 text-md text-zinc-500", {
                 hidden: toggleCollapse,
@@ -80,9 +80,16 @@ const Sidebar = () => {
               <div key={menu.id} className="flex items-center cursor-pointer hover:bg-zinc-200 rounded w-full overflow-hidden whitespace-nowrap mb-1">
                 <Link href={menu.link}>
                   <div className="flex p-4 items-center w-full h-full">
-                    <div>
-                      <menu.icon />
-                    </div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <menu.icon size={22} />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>{menu.label}</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>                 
                     {!toggleCollapse && (
                       <span
                         className={classNames(
@@ -100,16 +107,24 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className='flex px-4 py-3'>
-        <div style={{ width: "2.5rem" }}>
-          <SignOut size={24} />
-        </div>
+      <div className='flex p-4 w-full cursor-pointer rounded hover:bg-zinc-200'>       
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <SignOut size={24} />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Sair</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         {!toggleCollapse && (
-          <span className={classNames("text-md text-zinc-500")}>
+          <span className={classNames("text-md text-zinc-500 pl-3")}>
             Sair
           </span>
         )}
       </div>
+    
     </div>
   );
 };
