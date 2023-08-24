@@ -1,7 +1,22 @@
 'use client'
 import classNames from "classnames";
-import React, { useState, useMemo } from "react";
-import { Notepad, CaretDoubleLeft, SignOut, Power } from "@phosphor-icons/react";
+import React, { useState } from "react";
+import Link from 'next/link';
+import { Article, Cube, ChartBar, SignOut, CaretDoubleLeft , Notepad } from "@phosphor-icons/react";
+
+const menuItems = [
+  { id: 1, label: "Dashboard", icon: ChartBar, link: "/" },
+  { id: 2, label: "Área Temática", icon: Cube, link: "/thematic_area" },
+  { id: 3, label: "Tipo de Item", icon: Article, link: "/types" },
+  
+];
+
+interface MenuItem {
+  id: number;
+  label: string;
+  icon: React.ComponentType;
+  link: string;
+}
 
 const Sidebar = () => {
   const [toggleCollapse, setToggleCollapse] = useState(false);
@@ -40,7 +55,7 @@ const Sidebar = () => {
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative">
           <div className="flex pl-1 gap-4">
-            <Notepad size={40}/>
+            <Notepad size={40} />
             <span
               className={classNames("mt-2 text-md text-zinc-500", {
                 hidden: toggleCollapse,
@@ -60,7 +75,28 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col items-start mt-24">
-
+          {menuItems.map((menu: MenuItem) => {           
+            return (
+              <div key={menu.id} className="flex items-center cursor-pointer hover:bg-zinc-200 rounded w-full overflow-hidden whitespace-nowrap mb-1">
+                <Link href={menu.link}>
+                  <div className="flex p-4 items-center w-full h-full">
+                    <div>
+                      <menu.icon />
+                    </div>
+                    {!toggleCollapse && (
+                      <span
+                        className={classNames(
+                          "pl-3 text-md text-zinc-500"
+                        )}
+                      >
+                        {menu.label}
+                      </span>
+                    )}
+                  </div>
+                </Link>
+              </div>
+            );
+          })}
         </div>
       </div>
 
@@ -70,7 +106,8 @@ const Sidebar = () => {
         </div>
         {!toggleCollapse && (
           <span className={classNames("text-md text-zinc-500")}>
-Sair          </span>
+            Sair
+          </span>
         )}
       </div>
     </div>
