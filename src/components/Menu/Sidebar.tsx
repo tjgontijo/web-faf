@@ -54,8 +54,8 @@ const Sidebar = () => {
     >
       <div className="flex flex-col">
         <div className="flex items-center justify-between relative">
-          <div className="flex pl-1 gap-4">
-            <ReadCvLogo size={40} />
+          <div className="flex pl-3 gap-4">
+            <ReadCvLogo size={32} />
             <span
               className={classNames("mt-2 text-md text-zinc-500", {
                 hidden: toggleCollapse,
@@ -69,7 +69,7 @@ const Sidebar = () => {
               className={collapseIconClasses}
               onClick={handleSidebarToggle}
             >
-              <CaretDoubleLeft />
+              <CaretDoubleLeft size={22} />
             </button>
           )}
         </div>
