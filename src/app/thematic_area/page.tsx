@@ -26,9 +26,12 @@ import { Button } from "@/components/ui/button"
 
 const formSchema = z.object(
   {
-    thematicArea: z.string().min(1, {
+    short_name: z.string().min(1, {
+      message: "Informe uma Sigla válida",
+    }),
+    name: z.string().min(1, {
       message: "Informe uma Área Temática válida"
-    })
+    }),
   }
 )
 
@@ -36,13 +39,14 @@ export default function Types() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      thematicArea: "",
+      short_name: "",
+      name: "",
     }
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch("http://localhost:3333/thematic_area", {
+      await fetch("http://localhost:3333/thematic_area", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -71,9 +75,22 @@ export default function Types() {
     <>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
+          <FormField
+            control={form.control}
+            name="short_name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Sigla</FormLabel>
+                <FormControl>
+                  <Input placeholder="Qual a Sigla?" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         <FormField
           control={form.control}
-          name="thematicArea"
+          name="name"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Área Temática</FormLabel>
