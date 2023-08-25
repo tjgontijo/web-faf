@@ -46,13 +46,21 @@ export default function Types() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      await fetch("http://localhost:3333/thematic_area", {
+      const response = await fetch("http://localhost:3333/thematic_area", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(values),
-      });     
+      });
+
+      if (response.ok) {
+        form.reset()
+        console.log("Item cadastrado com sucesso!");
+      } else {
+        form.reset()
+        console.error("Erro ao cadastrar o item");
+      }
     } catch (error) {
       form.reset()
       console.error("Erro na requisição:", error);
@@ -73,8 +81,8 @@ export default function Types() {
 
   return (
     <>
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
           <FormField
             control={form.control}
             name="short_name"
@@ -88,22 +96,22 @@ export default function Types() {
               </FormItem>
             )}
           />
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Área Temática</FormLabel>
-              <FormControl>
-                <Input placeholder="Qual Área Temática deseja cadastrar?" {...field} />
-              </FormControl>            
-              <FormMessage />
-            </FormItem>
-          )}
-        />       
-        <Button variant="outline" type="submit">Cadastrar</Button>
-      </form>
-    </Form>
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Área Temática</FormLabel>
+                <FormControl>
+                  <Input placeholder="Qual Área Temática deseja cadastrar?" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <Button variant="outline" type="submit">Cadastrar</Button>
+        </form>
+      </Form>
       <div className="pt-8">
         <Table>
           <TableCaption>Lista de Áreas Temáticas</TableCaption>
