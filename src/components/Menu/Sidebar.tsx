@@ -7,8 +7,15 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 
 const menuItems = [
   { id: 1, label: "Dashboard", icon: PresentationChart, link: "/" },
-  { id: 2, label: "Área Temática", icon: Cube, link: "/thematic_area" },
-  { id: 3, label: "Tipo de Item", icon: Article, link: "/types" }  
+  { id: 2, label: "Instituições", icon: Cube, link: "/" },
+  { id: 3, label: "Metas Plano", icon: Cube, link: "/" },
+  { id: 4, label: "Área Temática", icon: Cube, link: "/thematic_area" },
+  { id: 5, label: "Tipo do Item", icon: Article, link: "/types" },
+  { id: 6, label: "Grupo do Item", icon: Article, link: "/types" },  
+  { id: 7, label: "Classe de Item", icon: Article, link: "/types" },  
+  { id: 8, label: "Itens", icon: Article, link: "/types" },  
+  { id: 9, label: "Ações", icon: Article, link: "/types" },  
+  { id: 10, label: "Planos de Ação", icon: Article, link: "/types" }  
 ];
 
 interface MenuItem {

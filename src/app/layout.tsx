@@ -23,7 +23,7 @@ export default function RootLayout({
           <aside>
             <Sidebar />
           </aside>
-          <main className='bg-zinc-50 flex-1 m-16 p-4 border-1 rounded-md shadow-lg text-zinc-500'>
+          <main className='bg-zinc-50 flex-1 m-12 p-6 border-1 rounded-md shadow-zinc-300 shadow-md'>
             {children}
           </main>    
         </div>    
