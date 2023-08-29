@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { Loader } from "lucide-react"
 
 const formSchema = z.object(
   {
@@ -56,16 +57,12 @@ export default function Types() {
 
       if (response.ok) {
         form.reset()
-        fetchThematicAreas();
         console.log("Item cadastrado com sucesso!");
-      } else {
-        form.reset()
         fetchThematicAreas();
+      } else {               
         console.error("Erro ao cadastrar o item");
       }
-    } catch (error) {
-      form.reset()
-      fetchThematicAreas();
+    } catch (error) {      
       console.error("Erro na requisição:", error);
     }
   }
@@ -133,11 +130,13 @@ export default function Types() {
         </form>
       </Form>
       <div className="pt-8">
+       
         <Table>
           <TableCaption>Lista de Áreas Temáticas</TableCaption>
           <TableHeader>
             <TableRow>
-              <TableHead>Área Temática</TableHead>
+              <TableHead>Sigla</TableHead>
+              <TableHead>Nome</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -149,6 +148,7 @@ export default function Types() {
             ))}
           </TableBody>
         </Table>
+       
       </div>
     </>
   )
