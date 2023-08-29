@@ -59,10 +59,10 @@ export default function Types() {
         form.reset()
         console.log("Item cadastrado com sucesso!");
         fetchThematicAreas();
-      } else {               
+      } else {
         console.error("Erro ao cadastrar o item");
       }
-    } catch (error) {      
+    } catch (error) {
       console.error("Erro na requisição:", error);
     }
   }
@@ -75,7 +75,7 @@ export default function Types() {
   }
 
   const [thematicAreas, setThematicAreas] = useState<ThematicArea[]>([]);
-  
+
 
   async function fetchThematicAreas() {
     try {
@@ -129,8 +129,8 @@ export default function Types() {
           <Button variant="outline" type="submit">Cadastrar</Button>
         </form>
       </Form>
-      <div className="pt-8">
-       
+      <div className="pt-8 overflow-y-auto">
+
         <Table>
           <TableCaption>Lista de Áreas Temáticas</TableCaption>
           <TableHeader>
@@ -148,7 +148,7 @@ export default function Types() {
             ))}
           </TableBody>
         </Table>
-       
+
       </div>
     </>
   )
