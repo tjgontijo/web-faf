@@ -1,4 +1,3 @@
-
 import Sidebar from '@/components/Menu/Sidebar'
 import './globals.css'
 import type { Metadata } from 'next'
@@ -19,14 +18,16 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <div className="flex">
+        <div className="flex h-screen">
           <aside>
             <Sidebar />
           </aside>
-          <main className='bg-zinc-50 flex-1 m-12 p-6 border-1 rounded-md shadow-zinc-300 shadow-md'>
-            {children}
-          </main>    
-        </div>    
+          <main className='flex-auto'>
+            <div className='flex flex-col bg-zinc-50 m-12 p-6 border-1 rounded-md shadow-zinc-300 shadow-md box-border h-[90%]'>
+              {children}
+            </div>
+          </main>
+        </div>
       </body>
     </html>
   )
