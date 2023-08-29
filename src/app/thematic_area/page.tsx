@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
 import { useForm } from "react-hook-form"
@@ -56,28 +56,48 @@ export default function Types() {
 
       if (response.ok) {
         form.reset()
+        fetchThematicAreas();
         console.log("Item cadastrado com sucesso!");
       } else {
         form.reset()
+        fetchThematicAreas();
         console.error("Erro ao cadastrar o item");
       }
     } catch (error) {
       form.reset()
+      fetchThematicAreas();
       console.error("Erro na requisição:", error);
     }
   }
 
-  const [thematicAreas, setThematicAreas] = useState<string[]>([]);
+  interface ThematicArea {
+    id: string;
+    short_name: string;
+    name: string;
+    created_at: string;
+  }
+
+  const [thematicAreas, setThematicAreas] = useState<ThematicArea[]>([]);
+  
 
   async function fetchThematicAreas() {
     try {
       const response = await fetch("http://localhost:3333/thematic_area");
       const data = await response.json();
-      setThematicAreas(data);
+      console.log("Dados da API:", data); // Adicione esta linha
+
+      if (Array.isArray(data.thematicArea)) {
+        setThematicAreas(data.thematicArea);
+      } else {
+        console.error("Erro ao buscar áreas temáticas.");
+      }
     } catch (error) {
       console.error("Erro ao buscar áreas temáticas:", error);
     }
   }
+  useEffect(() => {
+    fetchThematicAreas();
+  }, []);
 
   return (
     <>
@@ -121,9 +141,10 @@ export default function Types() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {thematicAreas.map((thematicArea, index) => (
-              <TableRow key={index}>
-                <TableCell>{thematicArea}</TableCell>
+            {thematicAreas.map((thematicArea) => (
+              <TableRow key={thematicArea.id}>
+                <TableCell>{thematicArea.short_name}</TableCell>
+                <TableCell>{thematicArea.name}</TableCell>
               </TableRow>
             ))}
           </TableBody>
