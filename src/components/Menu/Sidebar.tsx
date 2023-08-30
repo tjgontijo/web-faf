@@ -90,7 +90,7 @@ const Sidebar = () => {
                     <TooltipProvider>
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <menu.icon size={22} />
+                          <menu.icon />
                         </TooltipTrigger>
                         <TooltipContent>
                           <p>{menu.label}</p>
