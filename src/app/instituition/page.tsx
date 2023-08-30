@@ -15,7 +15,8 @@ import {
 interface Instituition {
   id: string,
   short_name: string,
-  name: string
+  name: string,
+  created_at: string;
 }
 
 export default function Instituition() {
@@ -51,6 +52,7 @@ export default function Instituition() {
             <TableRow>
               <TableHead>Sigla</TableHead>
               <TableHead>Nome</TableHead>
+              <TableHead>Criado em</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -58,6 +60,7 @@ export default function Instituition() {
               <TableRow key={instituition.id}>
                 <TableCell>{instituition.short_name}</TableCell>
                 <TableCell>{instituition.name}</TableCell>
+                <TableCell>{instituition.created_at}</TableCell>
               </TableRow>
             ))}
           </TableBody>
