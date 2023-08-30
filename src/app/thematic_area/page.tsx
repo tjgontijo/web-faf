@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
-import { Loader } from "lucide-react"
 
 const formSchema = z.object(
   {
@@ -79,7 +78,7 @@ export default function Types() {
 
   async function fetchThematicAreas() {
     try {
-      const response = await fetch("http://localhost:3333/thematic_area");
+      const response = await fetch("http://localhost:3333/thematic_area", { cache: 'force-cache' });
       const data = await response.json();
       console.log("Dados da API:", data); // Adicione esta linha
 
