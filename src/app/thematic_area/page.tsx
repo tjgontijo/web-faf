@@ -78,7 +78,8 @@ export default function Types() {
 
   async function fetchThematicAreas() {
     try {
-      const response = await fetch("http://localhost:3333/thematic_area", { cache: 'force-cache' });
+      const response = await fetch("http://localhost:3333/thematic_area", {
+         cache: 'force-cache' });
       const data = await response.json();
       console.log("Dados da API:", data); // Adicione esta linha
 
@@ -136,6 +137,7 @@ export default function Types() {
             <TableRow>
               <TableHead>Sigla</TableHead>
               <TableHead>Nome</TableHead>
+              <TableHead>Criado em</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -143,6 +145,7 @@ export default function Types() {
               <TableRow key={thematicArea.id}>
                 <TableCell>{thematicArea.short_name}</TableCell>
                 <TableCell>{thematicArea.name}</TableCell>
+                <TableCell>{thematicArea.created_at}</TableCell>
               </TableRow>
             ))}
           </TableBody>
