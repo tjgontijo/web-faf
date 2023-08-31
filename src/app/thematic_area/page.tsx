@@ -75,11 +75,9 @@ export default function Types() {
 
   const [thematicAreas, setThematicAreas] = useState<ThematicArea[]>([]);
 
-
   async function fetchThematicAreas() {
     try {
-      const response = await fetch("http://localhost:3333/thematic_area", {
-         cache: 'force-cache' });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/thematic_area`);
       const data = await response.json();
       console.log("Dados da API:", data); // Adicione esta linha
 

@@ -25,7 +25,7 @@ export default function Instituition() {
 
   async function fetchInstituitions() { // Fix the function name here
     try {
-      const response = await fetch("http://localhost:3333/instituition", { cache: 'force-cache' });
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instituition`);
       const data = await response.json();
       console.log("Dados da API:", data);
 
@@ -47,7 +47,7 @@ export default function Instituition() {
     <>
       <div className="pt-8">
         <h1>Instituições</h1>
-        <Table>          
+        <Table>
           <TableHeader>
             <TableRow>
               <TableHead>Sigla</TableHead>
