@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { fetchDataFromAPI } from "../utils/fetch-api";
+import { fetchDataFromAPI } from "../../components/utils/fetch-api";
 
 interface Instituition {
   id: string,
