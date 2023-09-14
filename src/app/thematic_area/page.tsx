@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/table";
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
+import { formatDate } from "@/lib/utils"
 
 const formSchema = z.object(
   {
@@ -79,7 +80,7 @@ export default function Types() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/thematic_area`);
       const data = await response.json();
-      console.log("Dados da API:", data); // Adicione esta linha
+      //console.log("Dados da API:", data); // Adicione esta linha
 
       if (Array.isArray(data.thematicArea)) {
         setThematicAreas(data.thematicArea);
@@ -142,8 +143,8 @@ export default function Types() {
             {thematicAreas.map((thematicArea) => (
               <TableRow key={thematicArea.id}>
                 <TableCell>{thematicArea.short_name}</TableCell>
-                <TableCell>{thematicArea.name}</TableCell>
-                <TableCell>{thematicArea.created_at}</TableCell>
+                <TableCell>{thematicArea.name}</TableCell>                
+                <TableCell>{formatDate(thematicArea.created_at)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
