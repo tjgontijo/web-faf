@@ -25,7 +25,7 @@ export default function Instituition() {
 
   async function fetchInstituitions() { // Fix the function name here
     try {
-      const response = await fetch(`https://api-faf.onrender.com/instituition`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instituition`);
       const data = await response.json();
       console.log("Dados da API:", data);
 
