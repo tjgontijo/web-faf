@@ -75,8 +75,7 @@ export default function SignUp() {
   }
 
   interface State {
-    id: string;
-    email: string;
+    id: string;    
     name: string;
   }
 
@@ -86,7 +85,7 @@ export default function SignUp() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/states`);
       const data = await response.json();
-      console.log("Dados da API:", data);
+      //console.log("Dados da API:", data);
 
       if (Array.isArray(data.states)) {
         setStates(data.states);
