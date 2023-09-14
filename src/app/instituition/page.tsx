@@ -10,6 +10,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { formatDate } from "@/lib/utils";
 
 interface Instituition {
   id: string,
@@ -26,7 +27,7 @@ export default function Instituition() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instituition`);
       const data = await response.json();
-      console.log("Dados da API:", data);
+      //console.log("Dados da API:", data);
 
       if (Array.isArray(data.instituition)) {
         setInstituitions(data.instituition);
@@ -59,7 +60,7 @@ export default function Instituition() {
               <TableRow key={instituition.id}>
                 <TableCell>{instituition.short_name}</TableCell>
                 <TableCell>{instituition.name}</TableCell>
-                <TableCell>{instituition.created_at}</TableCell>
+                <TableCell>{formatDate(instituition.created_at)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
