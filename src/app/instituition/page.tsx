@@ -1,12 +1,15 @@
+"use client"
+
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { fetchDataFromAPI } from "../../components/utils/fetch-api";
 
 interface Instituition {
   id: string,
@@ -14,11 +17,30 @@ interface Instituition {
   name: string,
   created_at: string;
 }
-interface InstituitionPageProps {
-  instituitions: Instituition[];
-}
 
-export default function InstituitionPage({ instituitions }: InstituitionPageProps) {
+export default function Instituition() {
+
+  const [instituitions, setInstituitions] = useState<Instituition[]>([]); // Fix the variable name here
+
+  async function fetchInstituitions() { // Fix the function name here
+    try {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instituition`);
+      const data = await response.json();
+      console.log("Dados da API:", data);
+
+      if (Array.isArray(data.instituition)) {
+        setInstituitions(data.instituition);
+      } else {
+        console.error("Erro ao buscar áreas temáticas.");
+      }
+    } catch (error) {
+      console.error("Erro ao buscar áreas temáticas:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchInstituitions();
+  }, []);
 
   return (
     <>
@@ -45,23 +67,4 @@ export default function InstituitionPage({ instituitions }: InstituitionPageProp
       </div>
     </>
   )
-}
-
-export async function getServerSideProps() {
-  const data = await fetchDataFromAPI('instituition');
-
-  if (Array.isArray(data.instituition)) {
-    return {
-      props: {
-        instituitions: data.instituition,
-      },
-    };
-  } else {
-    console.error("Erro ao buscar");
-    return {
-      props: {
-        instituitions: [],
-      },
-    };
-  }
 }
