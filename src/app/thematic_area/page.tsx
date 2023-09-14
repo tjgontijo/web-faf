@@ -77,7 +77,7 @@ export default function Types() {
 
   async function fetchThematicAreas() {
     try {
-      const response = await fetch(`https://api-faf.onrender.com/thematic_area`);
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/thematic_area`);
       const data = await response.json();
       console.log("Dados da API:", data); // Adicione esta linha
 
