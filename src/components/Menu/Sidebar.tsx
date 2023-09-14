@@ -84,7 +84,7 @@ const Sidebar = () => {
         <div className="flex flex-col items-start mt-24">
           {menuItems.map((menu: MenuItem) => {           
             return (
-              <div key={menu.id} className="flex items-center cursor-pointer hover:bg-zinc-200 rounded w-full overflow-hidden whitespace-nowrap mb-1">
+              <div key={menu.id} className="flex items-center cursor-pointer hover:bg-[#fbfcfe] rounded w-full overflow-hidden whitespace-nowrap mb-1">
                 <Link href={menu.link}>
                   <div className="flex p-4 items-center w-full h-full">
                     <TooltipProvider>
