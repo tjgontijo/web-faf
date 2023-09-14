@@ -23,7 +23,7 @@ export default function RootLayout({
             <Sidebar />
           </aside>
           <main className='flex-auto'>
-            <div className='flex flex-col bg-zinc-50 m-12 p-6 border-1 rounded-md shadow-zinc-300 shadow-md box-border h-[90%]'>
+            <div className='flex flex-col bg-[#f8f8f8] m-12 p-6 border-1 rounded-md shadow-zinc-300 shadow-md box-border h-[90%]'>
               {children}
             </div>
           </main>
