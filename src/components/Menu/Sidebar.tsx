@@ -8,17 +8,17 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 const menuItems = [
   { id: 1, label: "Dashboard", icon: PresentationChart, link: "/" },
   { id: 2, label: "Instituições", icon: Shield, link: "/instituition" },
-  { id: 3, label: "Metas Plano", icon: Cube, link: "/" },
+  //{ id: 3, label: "Metas Plano", icon: Cube, link: "/" },
   { id: 4, label: "Área Temática", icon: Cube, link: "/thematic_area" },
-  { id: 12, label: "SignIn", icon: Article, link: "/sign-in" },
-  { id: 13, label: "SignUp", icon: Cube, link: "/sign-up" },
-  { id: 5, label: "Tipo do Item", icon: Article, link: "/" },
-  { id: 6, label: "Grupo do Item", icon: Article, link: "/" },
-  { id: 7, label: "Classe de Item", icon: Article, link: "/" },
-  { id: 8, label: "Itens", icon: Article, link: "/" },
+  //{ id: 5, label: "Tipo do Item", icon: Article, link: "/" },
+  //{ id: 6, label: "Grupo do Item", icon: Article, link: "/" },
+  //{ id: 7, label: "Classe de Item", icon: Article, link: "/" },
+  //{ id: 8, label: "Itens", icon: Article, link: "/" },
   { id: 9, label: "Ações", icon: Article, link: "/action" },
   { id: 10, label: "Planos de Ação", icon: Article, link: "/action-plan" },
-  { id: 11, label: "Metas Específicas", icon: Article, link: "/" }
+  //{ id: 11, label: "Metas Específicas", icon: Article, link: "/" },
+  { id: 12, label: "SignIn", icon: Article, link: "/sign-in" },
+  { id: 13, label: "SignUp", icon: Cube, link: "/sign-up" }
 ];
 
 interface MenuItem {
@@ -29,7 +29,7 @@ interface MenuItem {
 }
 
 const Sidebar = () => {
-  const [toggleCollapse, setToggleCollapse] = useState(true);
+  const [toggleCollapse, setToggleCollapse] = useState(false);
   const [isCollapsible, setIsCollapsible] = useState(false);
 
   const wrapperClasses = classNames(
