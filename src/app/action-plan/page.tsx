@@ -149,9 +149,15 @@ export default function CreatePlan() {
     <div className="overflow-y-auto p-11">
       <h1 className="text-2xl font-semibold mb-4">Cadastro do Plano de Ação</h1>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4" >
-              <div className="flex w-full gap-4">
-                <div className="flex w-1/4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+              <div className="flex">
+                <div className="flex">
+a
+                </div>
+                <div className="flex">
+a
+                </div>
+              </div>
                 <FormField
                   control={form.control}
                   name="year"              
@@ -160,7 +166,7 @@ export default function CreatePlan() {
                       <FormLabel>Ano</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="w-[250px]" >
+                          <SelectTrigger>
                             <SelectValue placeholder="Select a fruit" />
                           </SelectTrigger>
                         </FormControl>
@@ -174,8 +180,6 @@ export default function CreatePlan() {
                     </FormItem>
                   )}
                 />
-                </div>
-                <div className="flex w-1/4">
                 <FormField
                   control={form.control}
                   name="state"
@@ -184,7 +188,7 @@ export default function CreatePlan() {
                       <FormLabel>Estado</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="w-[280px]">
+                          <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                         </FormControl>
@@ -200,8 +204,6 @@ export default function CreatePlan() {
                     </FormItem>
                   )}
                 />
-                </div>
-                <div className="flex-auto">
                 <FormField
                   control={form.control}
                   name="thematicArea"
@@ -210,7 +212,7 @@ export default function CreatePlan() {
                       <FormLabel>Área Temática</FormLabel>
                       <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
-                          <SelectTrigger className="w-[580px]">
+                          <SelectTrigger>
                             <SelectValue />
                           </SelectTrigger>
                         </FormControl>
@@ -225,10 +227,7 @@ export default function CreatePlan() {
                       <FormMessage />
                     </FormItem>
                   )}
-                />      
-                </div>
-                </div>     
-            
+                />                  
               <FormField
                 control={form.control}
                 name="diagnosis"
