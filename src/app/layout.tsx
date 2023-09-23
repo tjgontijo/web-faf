@@ -18,15 +18,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={inter.className}>
-        <div className="flex h-screen">
-          <aside>
-            <Sidebar />
-          </aside>
-          <main className='flex-auto'>
-            <div className='flex flex-col m-12 p-6  box-border h-[90%] '>
-              {children}
-            </div>
-          </main>
+        <div className='h-screen items-center justify-center'>
+          {children}
         </div>
       </body>
     </html>
