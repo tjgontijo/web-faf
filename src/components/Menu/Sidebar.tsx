@@ -6,19 +6,19 @@ import { Article, Cube, PresentationChart, SignOut, CaretDoubleLeft, ReadCvLogo,
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 const menuItems = [
-  { id: 1, label: "Dashboard", icon: PresentationChart, link: "/" },
-  { id: 2, label: "Instituições", icon: Shield, link: "/instituition" },
-  { id: 3, label: "Metas Plano", icon: Cube, link: "/" },
-  { id: 4, label: "Área Temática", icon: Cube, link: "/thematic_area" },
+  { id: 1, label: "Dashboard", icon: PresentationChart, link: "/dashboard" },
+  { id: 2, label: "Instituições", icon: Shield, link: "/dashboard/instituition" },
+  { id: 3, label: "Metas Plano", icon: Cube, link: "/dashboard/" },
+  { id: 4, label: "Área Temática", icon: Cube, link: "/dashboard/thematic_area" },
   { id: 12, label: "SignIn", icon: Article, link: "/sign-in" },
   { id: 13, label: "SignUp", icon: Cube, link: "/sign-up" },
-  { id: 5, label: "Tipo do Item", icon: Article, link: "/" },
-  { id: 6, label: "Grupo do Item", icon: Article, link: "/" },
-  { id: 7, label: "Classe de Item", icon: Article, link: "/" },
-  { id: 8, label: "Itens", icon: Article, link: "/" },
-  { id: 9, label: "Ações", icon: Article, link: "/action" },
-  { id: 10, label: "Planos de Ação", icon: Article, link: "/action-plan" },
-  { id: 11, label: "Metas Específicas", icon: Article, link: "/" }
+  { id: 5, label: "Tipo do Item", icon: Article, link: "/dashboard/" },
+  { id: 6, label: "Grupo do Item", icon: Article, link: "/dashboard/" },
+  { id: 7, label: "Classe de Item", icon: Article, link: "/dashboard/" },
+  { id: 8, label: "Itens", icon: Article, link: "/dashboard/" },
+  { id: 9, label: "Ações", icon: Article, link: "/dashboard/action" },
+  { id: 10, label: "Planos de Ação", icon: Article, link: "/dashboard/action-plan" },
+  { id: 11, label: "Metas Específicas", icon: Article, link: "/dashboard/" }
 ];
 
 interface MenuItem {
@@ -85,7 +85,7 @@ const Sidebar = () => {
         </div>
 
         <div className="flex flex-col items-start mt-8">
-          {menuItems.map((menu: MenuItem) => {           
+          {menuItems.map((menu: MenuItem) => {
             return (
               <div key={menu.id} className="flex items-center cursor-pointer hover:bg-[#e5eeff] rounded w-full overflow-hidden whitespace-nowrap mb-1">
                 <Link href={menu.link}>
@@ -99,7 +99,7 @@ const Sidebar = () => {
                           <p>{menu.label}</p>
                         </TooltipContent>
                       </Tooltip>
-                    </TooltipProvider>                 
+                    </TooltipProvider>
                     {!toggleCollapse && (
                       <span
                         className={classNames(
@@ -117,24 +117,24 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className='flex p-4 w-full cursor-pointer rounded hover:bg-zinc-200'>       
-          <TooltipProvider>
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <SignOut size={24} />
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>Sair</p>
-              </TooltipContent>
-            </Tooltip>
-          </TooltipProvider>
+      <div className='flex p-4 w-full cursor-pointer rounded hover:bg-zinc-200'>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <SignOut size={24} />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>Sair</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
         {!toggleCollapse && (
           <span className={classNames("text-md text-zinc-500 pl-3")}>
             Sair
           </span>
         )}
       </div>
-    
+
     </div>
   );
 };
