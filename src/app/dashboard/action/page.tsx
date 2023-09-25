@@ -10,6 +10,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface ThematicArea {
   id: string;
@@ -33,8 +37,7 @@ export default function Action() {
   async function fetchActions() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/actions`);
-      const data = await response.json();
-      console.log("Dados da API:", data);
+      const data = await response.json();      
 
       if (Array.isArray(data.actions)) {
         setActions(data.actions);
@@ -52,8 +55,19 @@ export default function Action() {
 
   return (
     <>
-      <div className="pt-8">
-        <h1>Ações</h1>
+      <ScrollArea className="w-full p-8 rounded-md">
+        <div className="flex justify-between">
+          <div className="flex">
+            <h1 className="text-2xl font-semibold mb-4">Ações</h1>
+          </div>
+          <div className="flex">
+            <Link href="/dashboard/action/create">
+              <Button size="icon">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
         <Table>
           <TableHeader>
             <TableRow>
@@ -71,8 +85,8 @@ export default function Action() {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
-      </div>
+        </Table>      
+      </ScrollArea>
     </>
   )
 }
