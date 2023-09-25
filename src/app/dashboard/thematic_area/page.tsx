@@ -1,17 +1,5 @@
 "use client"
-
-import { useEffect, useState } from "react"
-import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
-import { useForm } from "react-hook-form"
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from "@/components/ui/form"
+import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
@@ -21,52 +9,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { formatDate } from "@/lib/utils"
-
-const formSchema = z.object(
-  {
-    short_name: z.string().min(1, {
-      message: "Informe uma Sigla válida",
-    }),
-    name: z.string().min(1, {
-      message: "Informe uma Área Temática válida"
-    }),
-  }
-)
+import { formatDate } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export default function Types() {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      short_name: "",
-      name: "",
-    }
-  })
-
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    try {
-      const response = await fetch("http://localhost:3333/thematic_area", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (response.ok) {
-        form.reset()
-        console.log("Item cadastrado com sucesso!");
-        fetchThematicAreas();
-      } else {
-        console.error("Erro ao cadastrar o item");
-      }
-    } catch (error) {
-      console.error("Erro na requisição:", error);
-    }
-  }
-
   interface ThematicArea {
     id: string;
     short_name: string;
@@ -80,7 +29,6 @@ export default function Types() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/thematic_area`);
       const data = await response.json();
-      //console.log("Dados da API:", data); // Adicione esta linha
 
       if (Array.isArray(data.thematicArea)) {
         setThematicAreas(data.thematicArea);
@@ -91,66 +39,46 @@ export default function Types() {
       console.error("Erro ao buscar áreas temáticas:", error);
     }
   }
+
   useEffect(() => {
     fetchThematicAreas();
   }, []);
 
   return (
     <>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-96">
-          <FormField
-            control={form.control}
-            name="short_name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Sigla</FormLabel>
-                <FormControl>
-                  <Input placeholder="Qual a Sigla?" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Área Temática</FormLabel>
-                <FormControl>
-                  <Input placeholder="Qual Área Temática deseja cadastrar?" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button variant="outline" type="submit">Cadastrar</Button>
-        </form>
-      </Form>
-      <div className="pt-8 overflow-y-auto">
-
-        <Table>
-          <TableCaption>Lista de Áreas Temáticas</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Sigla</TableHead>
-              <TableHead>Nome</TableHead>
-              <TableHead>Criado em</TableHead>
+      <ScrollArea className="w-full p-8 rounded-md">
+        <div className="flex justify-between">
+          <div className="flex">
+            <h1 className="text-2xl font-semibold mb-4">Área Temática</h1>
+          </div>
+          <div className="flex">
+            <Link href="/dashboard/thematic_area/create">
+              <Button size="icon">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      <Table>
+        <TableCaption>Lista de Áreas Temáticas</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead>Sigla</TableHead>
+            <TableHead>Nome</TableHead>
+            <TableHead>Criado em</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {thematicAreas.map((thematicArea) => (
+            <TableRow key={thematicArea.id}>
+              <TableCell>{thematicArea.short_name}</TableCell>
+              <TableCell>{thematicArea.name}</TableCell>
+              <TableCell>{formatDate(thematicArea.created_at)}</TableCell>
             </TableRow>
-          </TableHeader>
-          <TableBody>
-            {thematicAreas.map((thematicArea) => (
-              <TableRow key={thematicArea.id}>
-                <TableCell>{thematicArea.short_name}</TableCell>
-                <TableCell>{thematicArea.name}</TableCell>                
-                <TableCell>{formatDate(thematicArea.created_at)}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-
-      </div>
+          ))}
+        </TableBody>
+      </Table>
+      </ScrollArea>
     </>
-  )
+  );
 }
