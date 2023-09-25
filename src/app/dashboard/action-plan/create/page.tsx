@@ -22,6 +22,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
+import { Plus } from "lucide-react";
 
 interface State {
   id: string;
@@ -149,7 +151,18 @@ export default function CreatePlan() {
   return (
     <>
       <ScrollArea className="w-full p-8 rounded-md">
-        <h1 className="text-2xl font-semibold mb-4">Cadastrar Plano de Ação</h1>
+        <div className="flex justify-between">
+          <div className="flex">
+            <h1 className="text-2xl font-semibold mb-4">Ações</h1>
+          </div>
+          <div className="flex">
+            <Link href="/dashboard/action/create">
+              <Button size="icon">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4 p-2" >
             <FormField
