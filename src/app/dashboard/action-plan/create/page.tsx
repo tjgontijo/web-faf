@@ -23,7 +23,8 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
-import { Plus } from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
+import { useRouter } from 'next/navigation'
 
 interface State {
   id: string;
@@ -73,26 +74,27 @@ const formSchema = z.object({
 });
 
 export default function CreatePlan() {
+  const router = useRouter()
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
       year: "",
       state: "",
       thematicArea: "",
-      diagnosis: "",
-      justification: "",
-      generalGoal: "",
-      implementationStrategy: "",
-      diagnosticImplementationStrategy: "",
-      governanceImplementationStrategy: "",
-      capacityImplementationStrategy: "",
-      acquisitionImplementationStrategy: "",
+      diagnosis: "asd",
+      justification: "asd",
+      generalGoal: "asd",
+      implementationStrategy: "asd",
+      diagnosticImplementationStrategy: "asd",
+      governanceImplementationStrategy: "asd",
+      capacityImplementationStrategy: "asd",
+      acquisitionImplementationStrategy: "asd",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/plan-actions`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/action-plans`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,10 +103,8 @@ export default function CreatePlan() {
       });
 
       if (response.ok) {
-        form.reset();
-        console.log("Plano de ação cadastrado com sucesso!");
+        router.push('/dashboard/action-plan')
       } else {
-        console.error("Erro ao cadastrar o plano de ação:", response.status);
         const errorData = await response.json();
         console.error("Detalhes do erro:", errorData);
       }
@@ -156,9 +156,9 @@ export default function CreatePlan() {
             <h1 className="text-2xl font-semibold mb-4">Ações</h1>
           </div>
           <div className="flex">
-            <Link href="/dashboard/action/create">
-              <Button size="icon">
-                <Plus className="h-4 w-4" />
+            <Link href="/dashboard/action-plan">
+              <Button variant="outline" size="icon">
+                <ArrowLeft className="h-4 w-4" />
               </Button>
             </Link>
           </div>
