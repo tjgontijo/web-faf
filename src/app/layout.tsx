@@ -1,4 +1,3 @@
-import Sidebar from '@/components/Menu/Sidebar'
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
@@ -17,10 +16,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <body className={inter.className}>
-        <div className='h-screen items-center justify-center'>
-          {children}
-        </div>
+      <body className={inter.className}>        
+          {children}        
       </body>
     </html>
   )
