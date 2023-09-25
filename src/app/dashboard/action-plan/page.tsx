@@ -55,7 +55,7 @@ export default function Instituition() {
             <h1 className="text-2xl font-semibold mb-4">Planos de Ação</h1>
           </div>
           <div className="flex">
-            <Link href="/dashboard/action/create">
+            <Link href="/dashboard/action-plan/create">
               <Button size="icon">
                 <Plus className="h-4 w-4" />
               </Button>
@@ -79,8 +79,8 @@ export default function Instituition() {
               </TableRow>
             ))}
           </TableBody>
-        </Table>      
-    </ScrollArea >
+        </Table>
+      </ScrollArea >
     </>
   )
 }
