@@ -4,13 +4,16 @@ import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface Instituition {
   id: string,
@@ -21,13 +24,12 @@ interface Instituition {
 
 export default function Instituition() {
 
-  const [instituitions, setInstituitions] = useState<Instituition[]>([]); // Fix the variable name here
+  const [instituitions, setInstituitions] = useState<Instituition[]>([]);
 
-  async function fetchInstituitions() { // Fix the function name here
+  async function fetchInstituitions() {
     try {
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instituition`);
       const data = await response.json();
-      //console.log("Dados da API:", data);
 
       if (Array.isArray(data.instituition)) {
         setInstituitions(data.instituition);
@@ -45,8 +47,20 @@ export default function Instituition() {
 
   return (
     <>
-      <div className="pt-8">
-        <h1>Instituições</h1>
+      <ScrollArea className="w-full p-8">
+        <div className="flex justify-between">
+          <div className="flex">
+            <h1 className="text-2xl font-semibold mb-4">Instituições</h1>
+          </div>
+          <div className="flex">
+            <Link href="/dashboard/instituition/create">
+              <Button size="icon">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+
         <Table>
           <TableHeader>
             <TableRow>
@@ -65,7 +79,7 @@ export default function Instituition() {
             ))}
           </TableBody>
         </Table>
-      </div>
+      </ScrollArea>
     </>
   )
 }
