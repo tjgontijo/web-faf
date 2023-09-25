@@ -11,6 +11,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { formatDate } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
 
 interface Instituition {
   id: string,
@@ -45,8 +49,19 @@ export default function Instituition() {
 
   return (
     <>
-      <div className="pt-8">
-        <h1>Instituições</h1>
+      <ScrollArea className="w-full p-8 rounded-md">
+        <div className="flex justify-between">
+          <div className="flex">
+            <h1 className="text-2xl font-semibold mb-4">Planos de Ação</h1>
+          </div>
+          <div className="flex">
+            <Link href="/dashboard/action/create">
+              <Button size="icon">
+                <Plus className="h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
         <Table>
           <TableHeader>
             <TableRow>
@@ -64,8 +79,8 @@ export default function Instituition() {
               </TableRow>
             ))}
           </TableBody>
-        </Table>
-      </div>
+        </Table>      
+    </ScrollArea >
     </>
   )
 }
