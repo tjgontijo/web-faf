@@ -1,24 +1,17 @@
 'use client'
+
 import classNames from "classnames";
 import React, { useState } from "react";
 import Link from 'next/link';
-import { Article, Cube, PresentationChart, SignOut, CaretDoubleLeft, ReadCvLogo, Shield } from "@phosphor-icons/react";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { BarChart3, ChevronsLeft, GanttChartSquare, LogOut, Menu, Play, Shield, Split } from "lucide-react";
 
 const menuItems = [
-  { id: 1, label: "Dashboard", icon: PresentationChart, link: "/dashboard" },
+  { id: 1, label: "Dashboard", icon: BarChart3, link: "/dashboard" },
   { id: 2, label: "Instituições", icon: Shield, link: "/dashboard/instituition" },
-  { id: 3, label: "Metas Plano", icon: Cube, link: "/dashboard/" },
-  { id: 4, label: "Área Temática", icon: Cube, link: "/dashboard/thematic_area" },
-  { id: 12, label: "SignIn", icon: Article, link: "/sign-in" },
-  { id: 13, label: "SignUp", icon: Cube, link: "/sign-up" },
-  { id: 5, label: "Tipo do Item", icon: Article, link: "/dashboard/" },
-  { id: 6, label: "Grupo do Item", icon: Article, link: "/dashboard/" },
-  { id: 7, label: "Classe de Item", icon: Article, link: "/dashboard/" },
-  { id: 8, label: "Itens", icon: Article, link: "/dashboard/" },
-  { id: 9, label: "Ações", icon: Article, link: "/dashboard/action" },
-  { id: 10, label: "Planos de Ação", icon: Article, link: "/dashboard/action-plan" },
-  { id: 11, label: "Metas Específicas", icon: Article, link: "/dashboard/" }
+  { id: 4, label: "Área Temática", icon: Split, link: "/dashboard/thematic_area" }, 
+  { id: 9, label: "Ações", icon: Play, link: "/dashboard/action" },
+  { id: 10, label: "Planos de Ação", icon: GanttChartSquare, link: "/dashboard/action-plan" },  
 ];
 
 interface MenuItem {
@@ -33,7 +26,7 @@ const Sidebar = () => {
   const [isCollapsible, setIsCollapsible] = useState(false);
 
   const wrapperClasses = classNames(
-    "h-screen px-4 pt-8 pb-4 bg-[#f8f8f8] flex justify-between flex-col",
+    "h-screen px-4 pt-8 pb-4 flex justify-between flex-col border-e-2 border-zinc-100 shadow	",
     {
       ["w-80"]: !toggleCollapse,
       ["w-25"]: toggleCollapse,
@@ -63,9 +56,9 @@ const Sidebar = () => {
       style={{ transition: "width 300ms cubic-bezier(0.2, 0, 0, 1) 0s" }}
     >
       <div className="flex flex-col">
-        <div className="flex items-center justify-between relative">
+        <div className="flex items-center justify-between relative ">
           <div className="flex pl-3 gap-4">
-            <ReadCvLogo size={32} />
+            <Menu size={32} />
             <span
               className={classNames("mt-2 text-md text-zinc-500", {
                 hidden: toggleCollapse,
@@ -79,12 +72,12 @@ const Sidebar = () => {
               className={collapseIconClasses}
               onClick={handleSidebarToggle}
             >
-              <CaretDoubleLeft size={22} />
+              <ChevronsLeft size={22} />
             </button>
           )}
         </div>
 
-        <div className="flex flex-col items-start mt-8">
+        <div className="flex flex-col items-start mt-8 ">
           {menuItems.map((menu: MenuItem) => {
             return (
               <div key={menu.id} className="flex items-center cursor-pointer hover:bg-[#e5eeff] rounded w-full overflow-hidden whitespace-nowrap mb-1">
@@ -121,7 +114,7 @@ const Sidebar = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <SignOut size={24} />
+              <LogOut />
             </TooltipTrigger>
             <TooltipContent>
               <p>Sair</p>
