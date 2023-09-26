@@ -4,48 +4,65 @@ import { useEffect, useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { formatDate } from "@/lib/utils";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Plus } from "lucide-react";
 
-interface Instituition {
-  id: string,
-  short_name: string,
-  name: string,
-  created_at: string;
+interface ThematicArea {
+  id: string;
+  short_name: string;
+  name: string;
+}
+interface State {
+  id: string;
+  short_name: string;
+  name: string;
 }
 
-export default function Instituition() {
+interface Plan {
+  id: string;
+  year: string;
+  state: State;
+  thematicArea: ThematicArea;
+  diagnosis: string;
+  justification: string;
+  generalGoal: string;
+  implementationStrategy: string;
+  diagnosticImplementationStrategy: string;
+  governanceImplementationStrategy: string;
+  capacityImplementationStrategy: string;
+  acquisitionImplementationStrategy: string;
+}
 
-  const [instituitions, setInstituitions] = useState<Instituition[]>([]); // Fix the variable name here
+export default function Plan() {
+    const [plans, setPlan] = useState<Plan[]>([]);
 
-  async function fetchInstituitions() { // Fix the function name here
-    try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/instituition`);
-      const data = await response.json();
-      //console.log("Dados da API:", data);
+    async function fetchPlans() {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/plan`);
+        const data = await response.json();        
 
-      if (Array.isArray(data.instituition)) {
-        setInstituitions(data.instituition);
-      } else {
-        console.error("Erro ao buscar áreas temáticas.");
+        if (Array.isArray(data.plans)) {
+          setPlan(data.plans);
+        } else {
+          console.error("Erro ao buscar áreas temáticas.");
+        }
+      } catch (error) {
+        console.error("Erro ao buscar áreas temáticas:", error);
       }
-    } catch (error) {
-      console.error("Erro ao buscar áreas temáticas:", error);
     }
-  }
 
-  useEffect(() => {
-    fetchInstituitions();
-  }, []);
+    useEffect(() => {
+      fetchPlans();
+    }, []);
+
+
 
   return (
     <>
@@ -65,17 +82,18 @@ export default function Instituition() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead>Sigla</TableHead>
-              <TableHead>Nome</TableHead>
-              <TableHead>Criado em</TableHead>
+              <TableHead>Ano</TableHead>
+              <TableHead>Estado</TableHead>
+
             </TableRow>
           </TableHeader>
+
           <TableBody>
-            {instituitions.map((instituition) => (
-              <TableRow key={instituition.id}>
-                <TableCell>{instituition.short_name}</TableCell>
-                <TableCell>{instituition.name}</TableCell>
-                <TableCell>{formatDate(instituition.created_at)}</TableCell>
+            {plans.map((plan) => (
+              <TableRow key={plan.id}>
+                <TableCell>{plan.year}</TableCell>               
+                <TableCell>{plan.state.name}</TableCell>               
+                <TableCell>{plan.thematicArea.short_name} - {plan.thematicArea.name}</TableCell>                 
               </TableRow>
             ))}
           </TableBody>

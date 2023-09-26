@@ -94,7 +94,7 @@ export default function CreatePlan() {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/action-plans`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/plan`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
