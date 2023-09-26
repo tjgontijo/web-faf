@@ -12,7 +12,7 @@ const menuItems = [
   { id: 2, label: "Instituições", icon: Shield, link: "/dashboard/instituition" },
   { id: 3, label: "Área Temática", icon: Split, link: "/dashboard/thematic_area" }, 
   { id: 4, label: "Ações", icon: Play, link: "/dashboard/action" },
-  { id: 5, label: "Planos de Ação", icon: GanttChartSquare, link: "/dashboard/action-plan" },  
+  { id: 5, label: "Planos de Ação", icon: GanttChartSquare, link: "/dashboard/plan" },  
 ];
 
 interface MenuItem {
