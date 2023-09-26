@@ -6,12 +6,13 @@ import Link from 'next/link';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { BarChart3, ChevronsLeft, GanttChartSquare, LogOut, Menu, Play, Shield, Split } from "lucide-react";
 
+
 const menuItems = [
   { id: 1, label: "Dashboard", icon: BarChart3, link: "/dashboard" },
   { id: 2, label: "Instituições", icon: Shield, link: "/dashboard/instituition" },
-  { id: 4, label: "Área Temática", icon: Split, link: "/dashboard/thematic_area" }, 
-  { id: 9, label: "Ações", icon: Play, link: "/dashboard/action" },
-  { id: 10, label: "Planos de Ação", icon: GanttChartSquare, link: "/dashboard/action-plan" },  
+  { id: 3, label: "Área Temática", icon: Split, link: "/dashboard/thematic_area" }, 
+  { id: 4, label: "Ações", icon: Play, link: "/dashboard/action" },
+  { id: 5, label: "Planos de Ação", icon: GanttChartSquare, link: "/dashboard/action-plan" },  
 ];
 
 interface MenuItem {
@@ -114,7 +115,11 @@ const Sidebar = () => {
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger asChild>
-              <LogOut />
+              <div className="flex">
+                <Link href="/">                 
+                    <LogOut />                 
+                </Link>
+              </div>
             </TooltipTrigger>
             <TooltipContent>
               <p>Sair</p>
